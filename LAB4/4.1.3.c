@@ -21,7 +21,7 @@ int main(int argc , char *argv[])
 		
 	server.sin_addr.s_addr = inet_addr("192.168.0.117"); //Please enter the ip address of your Server VM
 	server.sin_family = AF_INET;
-	server.sin_port = htons( 22 );
+	server.sin_port = htons( 8888  );
 
 	//Connect to remote server
 	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) < 0)

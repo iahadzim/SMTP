@@ -3,6 +3,7 @@ from base64 import *
 from getpass import getpass
 import ssl
 
+#SMTP CLIENT-SERVER MAIL TRANSFER APPLICATION
 #The mail server and the port with SMTP chosen : Google's mail server
 server = 'smtp.gmail.com'
 port = 587

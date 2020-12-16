@@ -1,24 +1,42 @@
 from socket import *
 from base64 import *
 from getpass import getpass
+from tqdm import tqdm
+from os import system
+from time import sleep
 import ssl
 
-#SMTP CLIENT-SERVER MAIL TRANSFER APPLICATION
+#Clear screen function for a more organized display
+def clear() :
+        _ = system('clear')
+
 #The mail server and the port with SMTP chosen : Google's mail server
 server = 'smtp.gmail.com'
 port = 587
 
+clear()
+
+#The client-server application's loading display
+print("\n\n\t\t\t\t\t\t\t - LOADING CLIENT-SERVER MAIL APPLICATION - \n\n")
+for i in tqdm(range(0, 100)):
+    sleep(.01)
+
+sleep(1)
+clear()
+
 #The client-server application's banner
 print("\n -------------------------------------------------------------------------------------------------- \n")
-print("\n\n\t\t\t - CLIENT-SERVER E-MAIL APPLICATION - \n\n")
+print("\n\t\t\t     - CLIENT-SERVER E-MAIL APPLICATION - \n\n")
 print(" \t      This python application will send your e-mail through G-mail's server. \n")
-print(" \t            *Do take note that G-mail accounts are preferred.        \n")
-print(" \t            *Please turn on [access for less secure apps] on \n")
-print(" \t             your G-mail account to use this application. ")
+print(" \t              *Do take note that G-mail accounts are preferred.\n")
+print(" \t              *Please turn on [access for less secure apps] on \n")
+print(" \t               your G-mail account to use this application. ")
 print("\n -------------------------------------------------------------------------------------------------- \n")
 
-#Sender's information fill in
-print("\t\t\t PLEASE ENTER YOUR CREDENTIALS \n\n")
+sleep(3)
+
+#Sender's information fill in"
+print("\t\t\t\tPLEASE ENTER YOUR CREDENTIALS \n\n")
 
 SENDER = input("\t\t Enter Your e-mail Address       : ")
 PASSWORD = getpass("\t\t Enter Your e-mail Password      : ")
@@ -26,15 +44,18 @@ PASSWORD = getpass("\t\t Enter Your e-mail Password      : ")
 print("\n -------------------------------------------------------------------------------------------------- \n")
 
 #Receiver's information and e-mail contents fill in
-print("\t\t\t PLEASE ENTER RECEIVER's CREDENTIAL & E-MAIL CONTENTS \n\n")
+print("\t\t\tPLEASE ENTER RECEIVER's CREDENTIAL & E-MAIL CONTENTS \n\n")
 
 RECEIVER = input("\t\t Enter Receiver's e-mail Address : ")
 SUBJECT = input("\t\t Enter Subject                   : ")
 MESSAGE = input("\t\t Enter Message                   : ")
 ENDMESSAGE = '\r\n.\r\n'
 
+sleep(1)
+clear()
+
 #The process of sending the e-mail using sockets
-print("\n ---------------------------- SENDING THE E-MAIL -------------------------------------------------- \n\n")
+print("\n\n -----------------------------------  SENDING THE E-MAIL ---------------------------------------- \n\n")
 
 #Start SMTP connection with server (smtp.gmail.com)
 socket = socket(AF_INET, SOCK_STREAM)
@@ -105,8 +126,8 @@ response11 = socketSSL.recv(1024)
 print(" [+] Reply after QUIT command       : " + response11.decode("utf-8"))
 
 socketSSL.close()
-print(" [+] Process complete. Please check your inbox. \n")
+print(" [+] Process complete. Please trace the server's replies and check your inbox. \n")
+
 print("\n -------------------------------------------------------------------------------------------------- \n\n")
 
 #End of application
-

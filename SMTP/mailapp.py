@@ -126,6 +126,7 @@ response11 = socketSSL.recv(1024)
 print(" [+] Reply after QUIT command       : " + response11.decode("utf-8"))
 
 socketSSL.close()
+socket.close()
 print(" [+] Process complete. Please trace the server's replies and check your inbox. \n")
 
 print("\n -------------------------------------------------------------------------------------------------- \n\n")

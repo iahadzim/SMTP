@@ -58,7 +58,7 @@ while option == 'Y' :
 	clear()
 
 	#The process of sending the e-mail using sockets
-	print("\n\n -----------------------------------  SENDING THE E-MAIL ---------------------------------------- \n\n")
+	print("\n -----------------------------------  SENDING THE E-MAIL ---------------------------------------- \n")
 
 	#Start SMTP connection with server (smtp.gmail.com)
 	s = socket(AF_INET, SOCK_STREAM)
@@ -78,10 +78,16 @@ while option == 'Y' :
 	response3 = s.recv(1024)
 	print(" [+] Reply after STARTTLS command   : " + response3.decode("utf-8"))
 
-	#Aunthenticating the e-mail account, to access and send e-mail
 	#Wrap socket with SSL to use G-mail's server securely
 	socketSSL = ssl.wrap_socket(s)
 
+        #Sending HELO/EHLO command to server again to initiate SMTP conversation with TLS
+	cmdEHLO = 'EHLO Alice\r\n'.encode()
+	socketSSL.send(cmdEHLO)
+	response2 = socketSSL.recv(1024)
+	print(" [+] Reply after EHLO command       : " + response2.decode("utf-8"))
+
+	#Aunthenticating the e-mail account, to access and send e-mail
 	SENDER_EMAIL = b64encode(SENDER.encode())
 	SENDER_PASSWORD = b64encode(PASSWORD.encode())
 
@@ -133,9 +139,9 @@ while option == 'Y' :
 	#Close client socket
 	s.close()
 
-	print(" [+] Process complete. Please trace the server's replies and check your inbox. \n")
+	print(" [+] Process complete. Please trace the server's replies and check your inbox.")
 
-	print("\n -------------------------------------------------------------------------------------------------- \n\n")
+	print("\n -------------------------------------------------------------------------------------------------- \n")
 
 	#Option for sending sending another e-mail
 	option = input("\t\t    WOULD YOU LIKE TO SEND ANOTHER E-MAIL? [ Y or N ] : ")
